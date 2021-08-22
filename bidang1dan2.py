@@ -2,28 +2,7 @@ class skem:
     def __init__(self):
         self.penilaian = {"A": 4.0, "AB": 3.5, "B": 3.0, "BC": 2.5, "C": 2.0}
         self.kredit = 1
-
-    def kompetisi(self):
-        na = {"Kompetisi":
-                  {"Juara 1": "A",
-                   "Juara 2": "AB",
-                   "Juara 3": "B",
-                   "Juara Harapan/Finalis": "BC",
-                   "Peserta": "C"},
-              "PKM":
-                  {"Peserta PIMNAS": "A",
-                   "Proposal didanai": "AB",
-                   "Upload proposal ke SIM BELMAWA": "B",
-                   "Peserta Liga PKM ITS": "BC",
-                   "ToT / Workshop PKM": "C"},
-              "Olahraga":
-                  {"Juara Kompetisi Olahraga": "A",
-                   "Peserta Kompetisi Olahraga": "AB",
-                   "Olahraga mengikuti UKM/KONI": "B",
-                   "Olahraga mandiri": "BC", }
-              }
-
-        kredit = {"Jumlah peserta":
+        self.kredit_kompetisi = {"Jumlah peserta":
                       {"Individu": 1,
                        "2 anggota": 2,
                        "Lebih dari 2 anggota": 3},
@@ -47,7 +26,26 @@ class skem:
                       {"Kemendikbud": 2,
                        "Non-Kemendikbud": 1}
                   }
-        return kredit, na
+
+    def kompetisi(self):
+        na = {"Kompetisi":
+                  {"Juara 1": "A",
+                   "Juara 2": "AB",
+                   "Juara 3": "B",
+                   "Juara Harapan/Finalis": "BC",
+                   "Peserta": "C"},
+              "PKM":
+                  {"Peserta PIMNAS": "A",
+                   "Proposal didanai": "AB",
+                   "Upload proposal ke SIM BELMAWA": "B",
+                   "Peserta Liga PKM ITS": "BC",
+                   "ToT / Workshop PKM": "C"},
+              "Olahraga":
+                  {"Juara Kompetisi Olahraga": "A",
+                   "Peserta Kompetisi Olahraga": "AB",
+                   "Olahraga mengikuti UKM/KONI": "B",
+                   "Olahraga mandiri": "BC"}}
+        return na
 
     def magang(self):
         kredit = {"Tempat Magang":
@@ -113,8 +111,7 @@ class skem:
         return kredit, na
 
     def kegiatan(self):
-        kredit = {"Kegiatan":
-                      {"Rentang Waktu":
+        kredit = {"Rentang Waktu":
                            {"<=1 Hari": 1,
                             "2-3 Hari": 2,
                             ">3 Hari": 3},
@@ -125,16 +122,17 @@ class skem:
                        "Skala":
                            {"Departemem": 1,
                             "Fakultas": 2,
-                            "Institut": 3}}}
-        na = "A"
+                            "Institut": 3}}
+        na = 4
         return kredit, na
 
     def LKMM(self):
-        na = "A"
-        kredit = {"LKMM Pra TD": 2,
-                  "LKMM TD / LKMW TD": 10,
-                  "LKMM TM / LKMW TM": 20,
-                  "LKMM TL": 30}
+        na = 4
+        kredit = {"LKMM":
+                      {"LKMM Pra TD": 2,
+                      "LKMM TD / LKMW TD": 10,
+                      "LKMM TM / LKMW TM": 20,
+                      "LKMM TL": 30}}
         return kredit, na
 
     def questioner(self, dct):
@@ -156,7 +154,7 @@ class skem:
 
     def main(self):
         bidang = [self.kompetisi(), self.magang(), self.wirausaha(), self.organisasi(), self.kegiatan(), self.LKMM()]
-        while True:
+        while True: # Loops if the input is wrong
             try:
                 choice = int(input("1. Kompetisi\n2. Magang\n3. Wirausaha\n4. Organisasi\n5. Kegiatan\n6. LKMM\n")) - 1
                 if choice <= len(bidang):
@@ -164,17 +162,26 @@ class skem:
             except ValueError:
                 pass
 
-        kredit, na = bidang[choice]
-        print("Nilai Akhir")
-        self.questioner(na)
-        print("\nKredit")
-        for i in kredit:
-            self.questioner(kredit[i])
+        if choice != 0:
+            kredit, na = bidang[choice]
+            print("Nilai Akhir")
+            self.questioner(na)
+            print("\nKredit")
+            for i in kredit:
+                self.questioner(kredit[i])
+        else:
+            na = self.kompetisi()
+            self.questioner(na)
+            for i in self.kredit_kompetisi:
+                self.questioner(self.kredit_kompetisi[i])
 
         print("Nilai Akhir = ", self.na)
         print("Kredit = ", self.kredit)
-        print("Kredit*NA = ", self.kredit*self.penilaian[self.na])
-
-
-skem = skem()
-skem.main()
+        if type(self.na) == int:
+            print("Kredit*NA = ", self.kredit*self.na)
+        else:
+            print("Kredit*NA = ", self.kredit*self.penilaian[self.na])
+while True:
+    skem_calc = skem()
+    skem_calc.main()
+    input()
