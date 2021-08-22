@@ -1,5 +1,17 @@
 import classprog as cp
-skem = cp.skem()
-skem.nilai_skem(cp.isr)
-print(skem.final)
-a = input()
+from bidang1dan2 import skem
+skem12_calc = skem()
+skem_calc = cp.skem()
+
+while True:
+    choice = int(input("1. Bidang 1 & 2\n2. Bidang\n3. Bidang 4\n"))
+    if choice == 1:
+        skem12_calc.main()
+    elif choice == 2:
+        skem_calc.nilai_skem(cp.peng_mas)
+        print(skem_calc.final)
+    elif choice == 3:
+        skem_calc.nilai_skem(cp.isr)
+        print(skem_calc.final)
+    else:
+        pass

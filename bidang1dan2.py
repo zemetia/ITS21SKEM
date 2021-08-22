@@ -181,7 +181,3 @@ class skem:
             print("Kredit*NA = ", self.kredit*self.na)
         else:
             print("Kredit*NA = ", self.kredit*self.penilaian[self.na])
-while True:
-    skem_calc = skem()
-    skem_calc.main()
-    input()
