@@ -14,10 +14,6 @@ isr = {
     "rentang_waktu": ["<1 Bulan", "Sd. 3 Bulan", "Sd. 6 Bulan", "Sd. 1 Tahun", ">1 Tahun"],
     "nilai": ["Pembicara/Nama Pertama/Instruktur", "Panitia/Moderator", "Peserta"]
 }
-# Kompetisi, Magang, dan Wirausaha
-kmw = {"kompetisi": 1, "magang": 1, "wirausaha": 1}
-# penilaian
-penilaian = [["A", 4.0], ["AB", 3.5], ["B", 3.0], ["BC", 2.5], ["C", 2.0]]
 
 
 class skem:
@@ -46,9 +42,9 @@ class skem:
                 self.kredit_desc.append(tipe[quest][x - 1])
                 self.kredit = self.final
             else:
-                self.final *= penilaian[x - 1][1]
-                self.nilai_angka = penilaian[x - 1][1]
-                self.nilai_huruf = penilaian[x - 1][0]
+                self.final *= self.penilaian[x - 1][1]
+                self.nilai_angka = self.penilaian[x - 1][1]
+                self.nilai_huruf = self.penilaian[x - 1][0]
 
     def csv_row(self):
         self.csv = '"' + self.nama_kegiatan + '",' + str(self.kredit) + ',"' + self.nilai_huruf + '",' + str(
