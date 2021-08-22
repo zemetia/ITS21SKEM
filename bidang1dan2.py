@@ -1,3 +1,5 @@
+# Bagian Darren, jika ada masalah, hubungin Mikask#8368
+
 class skem:
     def __init__(self):
         self.penilaian = {"A": 4.0, "AB": 3.5, "B": 3.0, "BC": 2.5, "C": 2.0}

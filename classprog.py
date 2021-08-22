@@ -1,3 +1,5 @@
+# Bagian Yoel, jika ada masalah tolong hubungi 
+
 # pengabdian masyarakat
 peng_mas = {
     "peran": ["Anggota", "Panitia Inti/Asisten", "Ketua"],
