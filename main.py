@@ -4,7 +4,7 @@ skem12_calc = skem()
 skem_calc = cp.skem()
 
 while True:
-    choice = int(input("1. Bidang 1 & 2\n2. Bidang\n3. Bidang 4\n"))
+    choice = int(input("1. Bidang 1 & 2\n2. Bidang 3\n3. Bidang 4\n"))
     if choice == 1:
         skem12_calc.main()
     elif choice == 2:
