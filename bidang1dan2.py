@@ -65,21 +65,19 @@ class skem:
                   "Bidang Ilmu":
                       {"Berhubungan": 2,
                        "Tidak berhubungan": 1}}
-        na = {"Magang":
-                  {"Magang Bersertifikat Kompetensi": "A",
+        na = {"Magang Bersertifikat Kompetensi": "A",
                    "Magang Bersertifikat Industri": "AB",
-                   "Magang Bersertifikat Industr": "B"}}
+                   "Magang Bersertifikat non-Industri": "B"}
 
         return kredit, na
 
     def wirausaha(self):
-        na = {"Wirausaha":
-                  {"Omzet > 50 Juta/Tahun": "A",
+        na = {"Omzet > 50 Juta/Tahun": "A",
                    "Omzet 20-50 Juta/Tahun": "AB",
                    "Omzet 5-19,9 Juta/Tahun": "B",
                    "Omzet 2 – 4,9 Juta/Tahun": "BC",
                    "Omzet < 2 Juta/Tahu": "C"
-                   }}
+                   }
         kredit = {"Peran":
                       {"Anggota": 1,
                        "Ketua": 2},
@@ -138,29 +136,42 @@ class skem:
         return kredit, na
 
     def questioner(self, dct):
-        if type(dct) == dict:
-            for n, i in enumerate(dct, 1):
-                print(str(n) + ". " + i)
-            choice = list(dct)[int(input()) - 1]
+        while True:
+            if type(dct) == dict:
+                for n, i in enumerate(dct, 1):
+                    print(str(n) + ". " + i)
 
-            print(choice)
-            if type(dct[choice]) == dict:
-                self.questioner(dct[choice])
+                try:
+                    opt = int(input()) - 1
+                    if opt < len(dct) and opt >= 0:
+                        choice = list(dct)[opt]
+                        print(choice)
+                        if type(dct[choice]) == dict:
+                            self.questioner(dct[choice])
+                            break
+                        else:
+                            if type(dct[choice]) == str:
+                                self.na = dct[choice]
+                                break
+                            elif type(dct[choice]) == int:
+                                self.kredit *= dct[choice]
+                                break
+                except ValueError:
+                    pass
             else:
-                if type(dct[choice]) == str:
-                    self.na = dct[choice]
-                elif type(dct[choice]) == int:
-                    self.kredit *= dct[choice]
-        else:
-            self.na = dct
+                self.na = dct
+                break
+
 
     def main(self):
         bidang = [self.kompetisi(), self.magang(), self.wirausaha(), self.organisasi(), self.kegiatan(), self.LKMM()]
-        while True: # Loops if the input is wrong
+        while True:  # Loops if the input is wrong
             try:
                 choice = int(input("1. Kompetisi\n2. Magang\n3. Wirausaha\n4. Organisasi\n5. Kegiatan\n6. LKMM\n")) - 1
-                if choice <= len(bidang):
+                if choice < len(bidang) and choice >= 0:
                     break
+                else:
+                    pass
             except ValueError:
                 pass
 
@@ -180,6 +191,6 @@ class skem:
         print("Nilai Akhir = ", self.na)
         print("Kredit = ", self.kredit)
         if type(self.na) == int:
-            print("Kredit*NA = ", self.kredit*self.na)
+            print("Kredit*NA = ", self.kredit*self.na, "\n")
         else:
-            print("Kredit*NA = ", self.kredit*self.penilaian[self.na])
+            print("Kredit*NA = ", self.kredit*self.penilaian[self.na], "\n")
