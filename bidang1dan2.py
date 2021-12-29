@@ -1,4 +1,4 @@
-# Bagian Darren, jika ada masalah tolong hubungi Mikask#8368
+# Jika ada masalah tolong hubungi Mikask#8368
 
 class skem:
     def __init__(self):
